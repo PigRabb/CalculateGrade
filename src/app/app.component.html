@@ -1,21 +1,82 @@
-<div class="container">
-  <div class="row" *ngIf="LoginStatus1">
+<div class="container fade-in" *ngIf="LoginStatus1">
+  <div class="row">
     <div class="col mainc">
-      <h1>Welcome to Grade calculation Online V.beta-1.0</h1>
+      <h1>ยินดีต้อนรับสู่ระบบคำนวณเกรดออนไลน์</h1>
       <div class="formGroup">
         <button type="button" class="btn btn-primary" (click)="auth()">
-          Log in with Google
+          เข้าสู่ระบบด้วย Google
         </button>
       </div>
     </div>
   </div>
+</div>
 
-  <div class="row" *ngIf="LoginStatus">
-    <div class="col">
-      <h1>Welcome to Grade calculation Online V.beta-1.0</h1>
-      <button type="button" class="btn btn-primary" (click)="Logout()">
-        Logout
-      </button>
+<!---Logined-->
+<div class="container fade-in " *ngIf="LoginStatus">
+  <div class="row">
+    <div class="col mainL">
+      <h1>ระบบคำนวณเกรดออนไลน์</h1>
     </div>
+  </div>
+  <div class="row menu">
+    <div class="btn-group btn-lg btn-block" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-secondary" (click)="gotoMenu(1)">หน้าแรก</button>
+      <button type="button" class="btn btn-secondary" (click)="gotoMenu(2)">ประเมินเกรด</button>
+      <button type="button" class="btn btn-secondary" disabled><b>ชื่อผู้ใช้งาน : </b>{{Name}}</button>
+      <button type="button" class="btn btn-secondary" (click)="Logout()">ออกจากระบบ</button>
+    </div>
+  </div>
+  <!---หน้าแรก-->
+  <div class="row fade-in home border border-dark" *ngIf="statusMenu1">
+    <div class="col">
+      <div class="row">
+        <div class="col">
+          <form class="border border-dark">
+            <div class="row form1">
+              <div class="col">
+                <input type="number" class="form-control" placeholder="ปีการศึกษา" min="2555">
+              </div>
+              <div class="col">
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>ภาคต้น</option>
+                  <option>ภาคปลาย</option>
+                  <option>ภาคฤดูร้อน</option>
+                </select>
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="รหัสวิชา">
+              </div>
+              <div class="col">
+                <input type="text" class="form-control" placeholder="ชื่อวิชา">
+              </div>
+              <div class="col">
+                <input type="number" class="form-control" placeholder="หน่วยกิต" min="1">
+              </div>
+              <div class="col">
+                <select class="form-control" id="exampleFormControlSelect1">
+                  <option>เลือกเกรดที่ได้</option>
+                  <option>A</option>
+                  <option>B+</option>
+                  <option>B</option>
+                  <option>C+</option>
+                  <option>C</option>
+                  <option>D+</option>
+                  <option>D</option>
+                  <option>F</option>
+                </select>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-secondary">เพิ่มรายวิชา</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <h1>ตารางผลการเรียน
+        </h1>
+      </div>
+    </div>
+
   </div>
 </div>
