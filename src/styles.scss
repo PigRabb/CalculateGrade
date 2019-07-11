@@ -62,3 +62,49 @@ body{
     padding-right: 1.5%;
    
 }
+
+
+#footer-wrap {
+    clear: both;
+    width: 910px;
+    font-size: 95%;
+    padding: 20px 0;
+    text-align: left;  
+  
+}
+  #footer-wrap a {
+    text-decoration: none;
+    color: #666666;
+    font-weight: bold;
+  }
+  #footer-wrap a:hover {
+    color: #000;  
+  }
+  #footer-wrap p {
+    padding: 10px 0;
+  }
+  #footer-wrap h2 {
+    color: #666666;
+    margin: 0;
+    padding: 0 10px; 
+  }
+  
+  /* footer */
+  #footer {
+    clear: both;
+    margin: 0 auto 10px auto; 
+    width: 850px;
+    padding: 5px 0;
+    text-align: center;
+  }
+
+  .fa {
+    padding: 20px;
+    font-size: 15px;
+    width: 15px;
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    border-radius: 50%;
+  }
+  
