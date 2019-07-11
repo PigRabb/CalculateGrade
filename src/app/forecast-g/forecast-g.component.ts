@@ -15,9 +15,7 @@ export class ForecastGComponent implements OnInit {
   }
 
   addData(gform:NgForm){
-    console.log("data="+gform.value)
     var path = '/grade-forcast/'+localStorage.getItem('uid');
-    console.log("path="+path)
     this.firedb.addData(path,gform.value).then(data=>{
 
     },err=>{

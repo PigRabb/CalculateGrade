@@ -20,7 +20,13 @@ export class AppComponent {
     public authService: AuthService, public afAuth: AngularFireAuth
   ) {
    
-    console.log(localStorage.getItem('uid').length)
+
+    
+
+
+  }
+
+   async ngOnInit(){
     if (localStorage.getItem('uid').length >= 5) {
       this.LoginStatus = true;
       this.Name = localStorage.getItem('name')
@@ -31,13 +37,10 @@ export class AppComponent {
       this.LoginStatus = false;
       this.LoginStatus1 = true;
     }
-    
-
-
   }
-
-  auth() {
-    this.authService.GoogleAuth().then(data => {
+  
+  async auth() {
+    await this.authService.GoogleAuth().then(data => {
       if (this.afAuth.auth.currentUser.uid != null || this.afAuth.auth.currentUser.uid.length > 0) {
         this.LoginStatus = true;
         this.LoginStatus1 = false;

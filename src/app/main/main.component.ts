@@ -16,14 +16,9 @@ export class MainComponent implements OnInit {
   ngOnInit() {
   }
   addData(gform:NgForm){
-    console.log("data="+gform.value)
     var path = '/grade/'+localStorage.getItem('uid');
-    console.log("path="+path)
     this.firedb.addData(path,gform.value).then(data=>{
-      console.log("GG")
     },err=>{
-      console.log(err.message)
-      console.log("error")
     })
   }
 }

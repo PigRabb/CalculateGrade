@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "dist/calculate-my-grade",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

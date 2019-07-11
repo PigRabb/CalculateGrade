@@ -35,9 +35,7 @@ export class GTabelComponent implements OnInit {
         allscore = allscore+(data2.credit*g)
       })
       this.totalCredit = allc
-      console.log(allscore)
       var x = allscore/allc
-      console.log("totalGrade = "+allscore/allc)
       this.totalGrade = x.toFixed(2)
     })
 
@@ -45,7 +43,6 @@ export class GTabelComponent implements OnInit {
 
   deleteItem(key){
     var path = '/grade/'+localStorage.getItem('uid');
-    console.log("key = "+key)
     this.firedb.deleteData(key,path)
     location.reload()
   }

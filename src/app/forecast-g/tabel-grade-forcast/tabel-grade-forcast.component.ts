@@ -41,12 +41,9 @@ export class TabelGradeForcastComponent implements OnInit {
         allscore = allscore+(data2.credit*g)
       })
       this.totalCreditS = allc
-      console.log(allscore)
       var x = allscore/allc
       this.totalScoreS = allscore;
-      console.log("totalGrade = "+allscore/allc)
       this.totalGradeS = x.toFixed(2)
-      
       await this.calG()
 
     })
@@ -55,15 +52,10 @@ export class TabelGradeForcastComponent implements OnInit {
   } 
 
   async calG(){
-    console.log("Start CalG")
-    console.log(this.totalCreditS)
-    console.log(this.totalScoreS)
     let allc2=0;
     let allscore2=0;
     await this.gradeItemA.subscribe(async data1=>{
-      console.log("StartData1 ")
       await data1.forEach(data2=>{
-        console.log("StartData2 ")
         allc2 = allc2+data2.credit
         let g ;
         if(data2.grade == "A"){ g = 4}
@@ -85,7 +77,6 @@ export class TabelGradeForcastComponent implements OnInit {
 
   deleteItem(key){
     var path = '/grade/'+localStorage.getItem('uid');
-    console.log("key = "+key)
     this.firedb.deleteData(key,path)
     location.reload()
   }
