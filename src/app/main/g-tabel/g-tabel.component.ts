@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireAction, DatabaseSnapshot } from '@angular/fire/database';
 import { FireDatabaseService } from 'src/app/service/fire-database.service';
+import { map } from 'rxjs/operators';
+
 @Component({
   selector: 'app-g-tabel',
   templateUrl: './g-tabel.component.html',
@@ -9,19 +11,24 @@ import { FireDatabaseService } from 'src/app/service/fire-database.service';
 })
 export class GTabelComponent implements OnInit {
   gradeItem : Observable<any[]>;
+  gradeItem1 : Observable<any[]>;
   totalGrade:any
   totalCredit:any
   constructor(private db:AngularFireDatabase,private firedb:FireDatabaseService) { 
  
   }
 
+
+
   async ngOnInit() {
     let allc=0;
     let allscore=0;
+    let count = 0;
     var path = '/grade/'+localStorage.getItem('uid');
     this.gradeItem = this.db.list(path).valueChanges()
     await this.gradeItem.subscribe(async data1=>{
       await data1.forEach(data2=>{
+        count++;
         allc = allc+data2.credit
         let g ;
         if(data2.grade == "A"){ g = 4}
@@ -36,14 +43,28 @@ export class GTabelComponent implements OnInit {
       })
       this.totalCredit = allc
       var x = allscore/allc
+      console.log("G = "+x)
       this.totalGrade = x.toFixed(2)
+      if(count >= data1.length){
+        allc=0;
+        allscore=0;
+        count = 0;
+      }
     })
-
+    this.gradeItem1 = this.db.list(path).snapshotChanges()
+    .pipe(map(items=>{
+       return items.map(a=>{
+         const data = a.payload.val();
+         const key = a.payload.key
+         return {key,data};
+       })
+    }))
   } 
 
   deleteItem(key){
     var path = '/grade/'+localStorage.getItem('uid');
     this.firedb.deleteData(key,path)
+    console.log(key)
     location.reload()
   }
 

@@ -16,22 +16,19 @@
                             <th scope="col">ชื่อวิชา</th>
                             <th scope="col">หน่วยกิต</th>
                             <th scope="col">เกรดที่ได้</th>
-                            <th scope="col">
-                              <button (click)="deleteItem()" class="btn btn-outline-danger">ลบตาราง</button>
-                            </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of gradeItem| async">
-                            <td>{{item.year}}</td>
-                            <td>{{item.semester}}</td>
-                            <td>{{item.courseCode}}</td>
-                            <td>{{item.courseTitle}}</td>
-                            <td>{{item.credit}}</td>
-                            <td>{{item.grade}}</td>
-                            <!-- <td>
-                                <button (click)="deleteItem(item.$key)" class="btn btn-outline-danger">ลบ</button>
-                            </td> -->
+                        <tr *ngFor="let item of gradeItem1| async">
+                            <td>{{item.data.year}}</td>
+                            <td>{{item.data.semester}}</td>
+                            <td>{{item.data.courseCode}}</td>
+                            <td>{{item.data.courseTitle}}</td>
+                            <td>{{item.data.credit}}</td>
+                            <td>{{item.data.grade}}</td>
+                             <td>
+                                <button (click)="deleteItem(item.key)" class="btn btn-outline-danger">ลบ</button>
+                            </td> 
                         </tr>
                     </tbody>
                 </table>

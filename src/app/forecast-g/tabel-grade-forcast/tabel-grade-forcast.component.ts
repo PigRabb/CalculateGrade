@@ -22,6 +22,7 @@ export class TabelGradeForcastComponent implements OnInit {
   async ngOnInit() {
     let allc=0;
     let allscore=0;
+    let count=0
     var path1 = '/grade-forcast/'+localStorage.getItem('uid');
     this.gradeItem = this.db.list(path1).valueChanges()
     var path2 = '/grade/'+localStorage.getItem('uid');
@@ -45,7 +46,11 @@ export class TabelGradeForcastComponent implements OnInit {
       this.totalScoreS = allscore;
       this.totalGradeS = x.toFixed(2)
       await this.calG()
-
+      if(count >= data1.length){
+        allc=0;
+        allscore=0;
+        count = 0;
+      }
     })
    
 
@@ -54,6 +59,7 @@ export class TabelGradeForcastComponent implements OnInit {
   async calG(){
     let allc2=0;
     let allscore2=0;
+    let count;
     await this.gradeItemA.subscribe(async data1=>{
       await data1.forEach(data2=>{
         allc2 = allc2+data2.credit
@@ -72,6 +78,11 @@ export class TabelGradeForcastComponent implements OnInit {
       this.totalCreditA = allc2+this.totalCreditS
       var x2 = ((this.totalScoreS+allscore2)/(this.totalCreditA ));
       this.totalGradeA = x2.toFixed(2)
+      if(count >= data1.length){
+        allc2=0;
+        allscore2=0;
+        count = 0;
+      }
     })
   }
 
