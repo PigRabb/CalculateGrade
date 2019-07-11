@@ -19,12 +19,13 @@ export class AppComponent {
   constructor(
     public authService: AuthService, public afAuth: AngularFireAuth
   ) {
+   
     console.log(localStorage.getItem('uid').length)
     if (localStorage.getItem('uid').length >= 5) {
       this.LoginStatus = true;
       this.Name = localStorage.getItem('name')
       this.LoginStatus1 = false;
-      this.statusMenu1 = true
+      this.statusMenu1 = true;
     }
     else {
       this.LoginStatus = false;
@@ -44,11 +45,13 @@ export class AppComponent {
     });
     console.log(this.afAuth.auth.currentUser.uid)
   }
+
   Logout() {
     this.authService.SignOut();
     this.LoginStatus = false;
     this.LoginStatus1 = true;
   }
+
   gotoMenu(menu: any) {
     if (menu == 1) {
       this.statusMenu1 = true;

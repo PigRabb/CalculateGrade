@@ -1,0 +1,48 @@
+<div class="row fade-in" *ngIf ="ckeckCredit()">
+    <div class="col">
+        <div class="row">
+            <div class="col">
+                <h1 class="g-h1">ตารางผลการเรียน</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col g-tabel-1">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">ปีการศึกษา</th>
+                            <th scope="col">ภาค</th>
+                            <th scope="col">รหัสวิชา</th>
+                            <th scope="col">ชื่อวิชา</th>
+                            <th scope="col">หน่วยกิต</th>
+                            <th scope="col">เกรดที่ได้</th>
+                            <th scope="col">
+                              <button (click)="deleteItem()" class="btn btn-outline-danger">ลบตาราง</button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of gradeItem| async">
+                            <td>{{item.year}}</td>
+                            <td>{{item.semester}}</td>
+                            <td>{{item.courseCode}}</td>
+                            <td>{{item.courseTitle}}</td>
+                            <td>{{item.credit}}</td>
+                            <td>{{item.grade}}</td>
+                            <!-- <td>
+                                <button (click)="deleteItem(item.$key)" class="btn btn-outline-danger">ลบ</button>
+                            </td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" *ngIf="ckeckCredit()">
+            <div class="col"></div>
+            <div class="col">   <b>หน่วยกิตทั้งหมดคือ </b>{{totalCredit}} หน่วย</div>
+            <div class="col">
+                <b>เกรดเฉลี่ยรวมที่ได้คือ </b> {{totalGrade}}
+            </div>
+        </div>
+    </div>
+</div>

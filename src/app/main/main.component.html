@@ -1,0 +1,50 @@
+<div class="row fade-in home border border-dark">
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <form class="border border-dark" #gform="ngForm" (ngSubmit)="addData(gform)" novalidate>
+          <div class="row form1">
+            <div class="col">
+              <input type="number" class="form-control" placeholder="ปีการศึกษา" min="2555" name="year" ngModel
+                required>
+            </div>
+            <div class="col">
+              <select class="form-control" name="semester" ngModel required>
+                <option value="" disabled selected>ภาคการศึกษา</option>
+                <option value="ต้น">ภาคต้น</option>
+                <option value="ปลาย">ภาคปลาย</option>
+                <option value="ฤดูร้อน">ภาคฤดูร้อน</option>
+              </select>
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="รหัสวิชา" name="courseCode" ngModel required>
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="ชื่อวิชา" name="courseTitle" ngModel required>
+            </div>
+            <div class="col">
+              <input type="number" class="form-control" placeholder="หน่วยกิต" min="1" name="credit" ngModel required>
+            </div>
+            <div class="col">
+              <select class="form-control" name="grade" ngModel required>
+                <option value="" disabled selected>เลือกเกรดที่ได้</option>
+                <option value="A">A</option>
+                <option value="B+">B+</option>
+                <option value="B">B</option>
+                <option value="C+">C+</option>
+                <option value="C">C</option>
+                <option value="D+">D+</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+              </select>
+            </div>
+            <div class="col">
+              <button type="submit" class="btn btn-secondary">เพิ่มรายวิชา</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <app-g-tabel></app-g-tabel>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="row fade-in head1">
+  <div class="col">
+    <div class="row">
+      <div class="col">
+        <div class="row">
+          <div class="col" style="text-align: center">
+            <h3>คาดคะเนเกรด</h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col" style="text-align: center">
+            <p>ใส่วิชาปัจจุบันที่เรียนอยู่และเกรดที่คาดว่าจะได้ และตัวระบบจะคำนวณเกรดออกมา</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row border border-dark">
+      <div class="col">
+        <div class="row">
+          <div class="col">
+            <form class="border border-dark" #grform="ngForm" (ngSubmit)="addData(grform)" novalidate>
+              <div class="row">
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="รหัสวิชา" name="courseCode" ngModel required>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="ชื่อวิชา" name="courseTitle" ngModel required>
+                </div>
+                <div class="col">
+                  <input type="number" class="form-control" placeholder="หน่วยกิต" min="1" name="credit" ngModel
+                    required>
+                </div>
+                <div class="col">
+                  <select class="form-control" name="grade" ngModel required>
+                    <option value="" disabled selected>เลือกเกรดที่ได้</option>
+                    <option value="A">A</option>
+                    <option value="B+">B+</option>
+                    <option value="B">B</option>
+                    <option value="C+">C+</option>
+                    <option value="C">C</option>
+                    <option value="D+">D+</option>
+                    <option value="D">D</option>
+                    <option value="F">F</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <button type="submit" class="btn btn-secondary">เพิ่มรายวิชา</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <app-tabel-grade-forcast></app-tabel-grade-forcast>
+      </div>
+    </div>
+  </div>
+</div>
