@@ -20,14 +20,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let item of gradeItem| async">
-                            <td>{{item.courseCode}}</td>
-                            <td>{{item.courseTitle}}</td>
-                            <td>{{item.credit}}</td>
-                            <td>{{item.grade}}</td>
-                            <!-- <td>
-                                <button (click)="deleteItem(item.$key)" class="btn btn-outline-danger">ลบ</button>
-                            </td> -->
+                        <tr *ngFor="let item of gradeItem1| async">
+                            <td>{{item.data.courseCode}}</td>
+                            <td>{{item.data.courseTitle}}</td>
+                            <td>{{item.data.credit}}</td>
+                            <td>{{item.data.grade}}</td>
+                            <td>
+                                <button (click)="deleteItem(item.key)" class="btn btn-outline-danger">ลบ</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

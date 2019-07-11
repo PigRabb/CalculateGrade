@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { FireDatabaseService } from 'src/app/service/fire-database.service';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-tabel-grade-forcast',
   templateUrl: './tabel-grade-forcast.component.html',
@@ -9,6 +10,7 @@ import { FireDatabaseService } from 'src/app/service/fire-database.service';
 })
 export class TabelGradeForcastComponent implements OnInit {
   gradeItem : Observable<any[]>;
+  gradeItem1 : Observable<any[]>;
   gradeItemA : Observable<any[]>;
   totalGradeS:any
   totalCreditS:any
@@ -51,6 +53,14 @@ export class TabelGradeForcastComponent implements OnInit {
         allscore=0;
         count = 0;
       }
+      this.gradeItem1 = this.db.list(path1).snapshotChanges()
+      .pipe(map(items=>{
+         return items.map(a=>{
+           const data = a.payload.val();
+           const key = a.payload.key
+           return {key,data};
+         })
+      }))
     })
    
 
@@ -87,8 +97,9 @@ export class TabelGradeForcastComponent implements OnInit {
   }
 
   deleteItem(key){
-    var path = '/grade/'+localStorage.getItem('uid');
+    var path = '/grade-forcast/'+localStorage.getItem('uid');
     this.firedb.deleteData(key,path)
+    console.log(key)
     location.reload()
   }
 
