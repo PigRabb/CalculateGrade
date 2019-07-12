@@ -3,6 +3,9 @@ import { Observable } from 'rxjs';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { FireDatabaseService } from 'src/app/service/fire-database.service';
 import { map } from 'rxjs/operators';
+import { NgForm } from '@angular/forms';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthService } from 'src/app/service/auth.service';
 @Component({
   selector: 'app-tabel-grade-forcast',
   templateUrl: './tabel-grade-forcast.component.html',
@@ -17,11 +20,18 @@ export class TabelGradeForcastComponent implements OnInit {
   totalScoreS:any
   totalGradeA:any
   totalCreditA:any
-  constructor(private db:AngularFireDatabase,private firedb:FireDatabaseService) { 
+  constructor(private db:AngularFireDatabase,private firedb:FireDatabaseService,private afAuth:AngularFireAuth,private auth:AuthService) { 
  
   }
 
   async ngOnInit() {
+    this.afAuth.authState.subscribe(res=>{
+      if(res){
+      }
+      else {
+        this.auth.relogin()
+      }
+  })
     let allc=0;
     let allscore=0;
     let count=0
@@ -112,5 +122,11 @@ export class TabelGradeForcastComponent implements OnInit {
       data = true
     }
     return data;
+  }
+
+  EditData(grform:NgForm,key){
+  var path = '/grade-forcast/'+localStorage.getItem('uid');
+  this.firedb.edit(key,path,grform)
+  location.reload()
   }
 }

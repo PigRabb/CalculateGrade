@@ -2,10 +2,10 @@
     <div class="col">
         <div class="row">
             <div class="col">
-               
+
             </div>
         </div>
-        <div class="row">
+        <div class="row ">
             <div class="col g-tabel-1">
                 <table class="table">
                     <thead class="thead-dark">
@@ -14,20 +14,20 @@
                             <th scope="col">ชื่อวิชา</th>
                             <th scope="col">หน่วยกิต</th>
                             <th scope="col">เกรดที่ได้</th>
-                            <th scope="col">
-                                <button (click)="deleteItem()" class="btn btn-outline-danger">ลบตาราง</button>
-                            </th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let item of gradeItem1| async">
-                            <td>{{item.data.courseCode}}</td>
+                            <td> {{item.data.courseCode}}</td>
                             <td>{{item.data.courseTitle}}</td>
                             <td>{{item.data.credit}}</td>
                             <td>{{item.data.grade}}</td>
                             <td>
-                                <button (click)="deleteItem(item.key)" class="btn btn-outline-danger">ลบ</button>
+                                <button (click)="deleteItem(item.key)" type="button"
+                                    class="btn btn-outline-danger btn-block">ลบ</button>
                             </td>
+
                         </tr>
                     </tbody>
                 </table>
@@ -43,12 +43,12 @@
                     </div>
                 </div>
                 <div class="row">
-                        <div class="col"></div>
-                        <div class="col"> <b>หน่วยกิตทั้งหมดคือ </b> {{totalCreditA}} หน่วย</div>
-                        <div class="col">
-                            <b>เกรดเฉลี่ยรวมที่ได้คือ </b> {{totalGradeA}}
-                        </div>
+                    <div class="col"></div>
+                    <div class="col"> <b>หน่วยกิตทั้งหมดคือ </b> {{totalCreditA}} หน่วย</div>
+                    <div class="col">
+                        <b>เกรดเฉลี่ยรวมที่ได้คือ </b> {{totalGradeA}}
                     </div>
+                </div>
             </div>
         </div>
     </div>

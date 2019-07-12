@@ -3,6 +3,8 @@ import { Observable } from 'rxjs';
 import { AngularFireDatabase, AngularFireAction, DatabaseSnapshot } from '@angular/fire/database';
 import { FireDatabaseService } from 'src/app/service/fire-database.service';
 import { map } from 'rxjs/operators';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-g-tabel',
@@ -14,13 +16,20 @@ export class GTabelComponent implements OnInit {
   gradeItem1 : Observable<any[]>;
   totalGrade:any
   totalCredit:any
-  constructor(private db:AngularFireDatabase,private firedb:FireDatabaseService) { 
+  constructor(private db:AngularFireDatabase,private firedb:FireDatabaseService,private afAuth:AngularFireAuth,private auth:AuthService) { 
  
   }
 
 
 
   async ngOnInit() {
+    this.afAuth.authState.subscribe(res=>{
+      if(res){
+      }
+      else {
+        this.auth.relogin()
+      }
+  })
     let allc=0;
     let allscore=0;
     let count = 0;

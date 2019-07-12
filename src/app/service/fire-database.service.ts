@@ -19,6 +19,9 @@ export class FireDatabaseService {
     
   }
   
+  async edit(key,path,data){
+    await this.db.list(path).set(key,data)
+  }
   async update(key,path,data){
      await this.db.list(path).update(key,data)
   

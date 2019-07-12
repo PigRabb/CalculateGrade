@@ -16,6 +16,7 @@
                             <th scope="col">ชื่อวิชา</th>
                             <th scope="col">หน่วยกิต</th>
                             <th scope="col">เกรดที่ได้</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -27,7 +28,7 @@
                             <td>{{item.data.credit}}</td>
                             <td>{{item.data.grade}}</td>
                              <td>
-                                <button (click)="deleteItem(item.key)" class="btn btn-outline-danger">ลบ</button>
+                                <button (click)="deleteItem(item.key)" class="btn btn-outline-danger btn-block">ลบ</button>
                             </td> 
                         </tr>
                     </tbody>

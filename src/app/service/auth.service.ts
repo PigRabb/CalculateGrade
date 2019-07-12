@@ -29,6 +29,7 @@ export class AuthService {
 
     /* Saving user data as an object in localstorage if logged out than set to null */
     this.afAuth.authState.subscribe(user => {
+          console.log("data = "+user.metadata)
       if (user) {
         localStorage.setItem('name',user.displayName);
         localStorage.setItem('email',user.email);
@@ -64,6 +65,7 @@ SignIn(email, password) {
     }).catch((error) => {
       window.alert(error.message)
     })
+    
 }
 
 // Sign in with Google
@@ -71,11 +73,18 @@ GoogleAuth() {
   return this.AuthLogin(new auth.GoogleAuthProvider());
 }
 
+relogin(){
+    this.afAuth.auth.signInAndRetrieveDataWithCredential(JSON.parse(localStorage.getItem('CAT')));
+}
 // Auth logic to run auth providers
 AuthLogin(provider) {
   return this.afAuth.auth.signInWithPopup(provider)
   .then((result) => {
-     this.ngZone.run(() => {
+    this.afAuth.auth.currentUser.getIdToken().then(token=>{
+      localStorage.setItem("CAT",JSON.stringify(result.credential.toJSON()))
+    })
+     this.ngZone.run((data) => {
+   
         this.router.navigate(['dashboard']);
       })
   }).catch((error) => {
@@ -89,6 +98,7 @@ SignOut() {
     localStorage.removeItem('name');
     localStorage.removeItem('email');
     localStorage.removeItem('uid');
+    localStorage.removeItem('CAT');
     this.router.navigate(['sign-in']);
   })
 }

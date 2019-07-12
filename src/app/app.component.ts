@@ -21,12 +21,24 @@ export class AppComponent {
   ) {
    
 
-    
+       this.afAuth.authState.subscribe(res=>{
+           if(res){
+           }
+           else {
+             
+           }
+       })
 
 
   }
 
    async ngOnInit(){
+  if(localStorage.getItem('uid') == null || localStorage.getItem('uid') == undefined){
+        localStorage.setItem('name', null);
+        localStorage.setItem('email', null);
+        localStorage.setItem('uid',null);
+  }
+  else {
     if (localStorage.getItem('uid').length >= 5) {
       this.LoginStatus = true;
       this.Name = localStorage.getItem('name')
@@ -37,6 +49,7 @@ export class AppComponent {
       this.LoginStatus = false;
       this.LoginStatus1 = true;
     }
+  }
   }
   
   async auth() {
