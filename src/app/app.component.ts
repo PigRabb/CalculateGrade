@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../app/service/auth.service'
 import { AngularFireAuth } from "@angular/fire/auth";
+import { flatMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -19,51 +20,60 @@ export class AppComponent {
   constructor(
     public authService: AuthService, public afAuth: AngularFireAuth
   ) {
-   
+    
+    if (localStorage.getItem('LogStastus')) {
+         if(localStorage.getItem('LogStastus')=="1"){
+          this.LoginStatus1 = false
+          this.LoginStatus = true
+         }else{
+          this.LoginStatus1 = true
+          this.LoginStatus = false
+         }
+    }else{
+      this.LoginStatus1 = true
+      this.LoginStatus = false
+      }
 
-       this.afAuth.authState.subscribe(res=>{
-           if(res){
-           }
-           else {
-             
-           }
-       })
-
+    
 
   }
 
-   async ngOnInit(){
-  if(localStorage.getItem('uid') == null || localStorage.getItem('uid') == undefined){
-        localStorage.setItem('name', null);
-        localStorage.setItem('email', null);
-        localStorage.setItem('uid',null);
-  }
-  else {
-    if (localStorage.getItem('uid').length >= 5) {
-      this.LoginStatus = true;
-      this.Name = localStorage.getItem('name')
-      this.LoginStatus1 = false;
-      this.statusMenu1 = true;
+  async ngOnInit() {
+    if (localStorage.getItem('uid') == null || localStorage.getItem('uid') == undefined) {
+      localStorage.setItem('name', null);
+      localStorage.setItem('email', null);
+      localStorage.setItem('uid', null);
     }
     else {
-      this.LoginStatus = false;
-      this.LoginStatus1 = true;
+      if (localStorage.getItem('uid').length >= 5) {
+        this.LoginStatus = true;
+        localStorage.setItem("LogStastus","1")
+        this.Name = await localStorage.getItem('name')
+        this.LoginStatus1 = false;
+        this.statusMenu1 = true;
+      }
+      else {
+        this.LoginStatus = false;
+        this.LoginStatus1 = true;
+      }
     }
   }
-  }
-  
-  async auth() {
-    await this.authService.GoogleAuth().then(data => {
-      if (this.afAuth.auth.currentUser.uid != null || this.afAuth.auth.currentUser.uid.length > 0) {
+
+   async auth() {
+    await  this.authService.GoogleAuth().then(async data => {
+      if (await this.afAuth.auth.currentUser.uid != null ||await this.afAuth.auth.currentUser.uid.length > 0) {
         this.LoginStatus = true;
         this.LoginStatus1 = false;
+        this.statusMenu1 = true;
+        this.statusMenu2 = false;
       }
     });
-    console.log(this.afAuth.auth.currentUser.uid)
+
   }
 
   Logout() {
     this.authService.SignOut();
+    localStorage.setItem("LogStastus","0")
     this.LoginStatus = false;
     this.LoginStatus1 = true;
   }

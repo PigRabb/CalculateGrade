@@ -18,7 +18,7 @@
       <h1>ระบบคำนวณเกรดออนไลน์</h1>
     </div>
   </div>
-  <div class="row menu">
+  <div class="row menu ">
     <div class="col">
       <div class="btn-group btn-lg btn-block" role="group" aria-label="Basic example">
         <button type="button" class="btn btn-secondary" (click)="gotoMenu(1)">หน้าแรก</button>
@@ -28,6 +28,14 @@
       </div>
     </div>
   </div>
-  <app-main *ngIf="statusMenu1"></app-main>
-  <app-forecast-g  *ngIf="statusMenu2"></app-forecast-g>
+  <div class="row" *ngIf="statusMenu1">
+    <div class="col">
+      <app-main ></app-main>
+    </div>
+  </div>
+  <div class="row" *ngIf="statusMenu2">
+    <div class="col">
+      <app-forecast-g ></app-forecast-g>
+    </div>
+  </div>
 </div>
